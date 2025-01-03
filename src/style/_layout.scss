@@ -13,6 +13,13 @@
     flex-direction: column;
 }
 
+.center-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
 .try-out.btn-group {
     padding: 0;
     display: flex;
