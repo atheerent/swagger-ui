@@ -48,10 +48,10 @@
     }
 }
 
-@mixin method($color)
+@mixin method($color, $opacity: .1)
 {
     border-color: $color;
-    background: rgba($color, .1);
+    background: rgba($color, $opacity);
 
     .opblock-summary-method
     {

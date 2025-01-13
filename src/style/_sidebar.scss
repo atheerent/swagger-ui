@@ -1,0 +1,124 @@
+.sidebar {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    position: relative;
+    background-color: transparent;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    border-right: 1px solid rgb(228, 231, 235);
+}
+
+.menu {
+    width: 300px;
+    word-break: break-all;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: $black;
+    font-weight: 600;
+    font-size: 18px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.menu-item {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin-top: 1px;
+    text-decoration: none;
+    line-height: 15px;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    pointer-events: auto;
+    color: rgb(31, 41, 51);
+    margin-left: 16px;
+    margin-bottom: 1px;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+}
+
+.menu-list-item {
+    padding: 8px;
+    &:hover {
+        border-radius: 5px;
+        background-color: rgb(228, 231, 235);
+        color: rgb(31, 41, 51) !important;
+    }
+}
+
+.side-arrow {
+    transform: rotate(-90deg) !important;
+}
+
+.sub-menu-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 15px;
+    font-size: 14px;
+    font-weight: 400;
+    pointer-events: auto;
+    color: rgb(31, 41, 51);
+    margin: 3px 20px;
+    &:hover {
+        border-radius: 5px;
+        background-color: rgb(228, 231, 235);
+        color: rgb(31, 41, 51);
+    }
+}
+
+.is-changed {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: red;
+}
+
+.method-name {
+    padding: 0 7px;
+    border-radius: 18px;
+    color: white;
+    font-weight: bolder;
+    height: 17px;
+    width: 48px;
+    font-size: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.method-post {
+    @include method($_color-post, 0.9);
+}
+
+.method-put {
+    @include method($_color-put, 0.9);
+}
+
+.method-delete {
+    @include method($_color-delete, 0.9);
+}
+
+.method-get {
+    @include method($_color-get, 0.9);
+}
+
+.method-patch {
+    @include method($_color-patch, 0.9);
+}
+
+.method-head {
+    @include method($_color-head, 0.9);
+}
+
+.method-options {
+    @include method($_color-options, 0.9);
+}
