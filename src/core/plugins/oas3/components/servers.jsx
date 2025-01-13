@@ -85,7 +85,7 @@ const Servers = ({
 
   return (
     <div className="servers">
-      <label htmlFor="servers">
+      {/* <label htmlFor="servers">
         <select
           onChange={handleServerChange}
           value={currentServer}
@@ -109,7 +109,7 @@ const Servers = ({
             <code>{getEffectiveServerValue(currentServer)}</code>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   )
 }
