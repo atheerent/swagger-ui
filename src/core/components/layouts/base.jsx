@@ -3,8 +3,16 @@
  */
 import React from "react"
 import PropTypes from "prop-types"
+import {jwtDecode} from 'jwt-decode';
+import Sidebar from "../sidebar"
 
 export default class BaseLayout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAuthenticated: false,
+    };
+  }
   static propTypes = {
     errSelectors: PropTypes.object.isRequired,
     errActions: PropTypes.object.isRequired,
@@ -12,10 +20,22 @@ export default class BaseLayout extends React.Component {
     oas3Selectors: PropTypes.object.isRequired,
     oas3Actions: PropTypes.object.isRequired,
     getComponent: PropTypes.func.isRequired,
+    layoutSelectors: PropTypes.object
+  }
+
+  componentDidMount() {
+    const authToken = new URL(window.location.href).searchParams.get('authToken');
+    try {      
+      if(!!authToken && jwtDecode(authToken)) {
+        this.state.isAuthenticated = true;
+      }
+    } catch (error) {
+      console.error("Access token is invalid.")      
+    }
   }
 
   render() {
-    const { errSelectors, specSelectors, getComponent } = this.props
+    const { errSelectors, specSelectors, getComponent, layoutSelectors } = this.props
 
     const SvgAssets = getComponent("SvgAssets")
     const InfoContainer = getComponent("InfoContainer", true)
@@ -96,55 +116,68 @@ export default class BaseLayout extends React.Component {
 
     return (
       <div className="swagger-ui">
-        <SvgAssets />
-        <VersionPragmaFilter
-          isSwagger2={isSwagger2}
-          isOAS3={isOAS3}
-          alsoShow={<Errors />}
-        >
-          <Errors />
-          <Row className="information-container">
-            <Col mobile={12}>
-              <InfoContainer />
-            </Col>
-          </Row>
+        {this.state.isAuthenticated ? (
+          <div style={{display: "flex"}}>
+            <>
+              <Sidebar onTagClick={this.handleTagClick} {...this.props} />
+            </>
+            <div>
+              <SvgAssets />
+              <VersionPragmaFilter
+                isSwagger2={isSwagger2}
+                isOAS3={isOAS3}
+                alsoShow={<Errors />}
+              >
+                <Errors />
+                <Row className="information-container">
+                  <Col mobile={12}>
+                    <InfoContainer />
+                  </Col>
+                </Row>
 
-          {hasServers || hasSchemes || hasSecurityDefinitions ? (
-            <div className="scheme-container">
-              <Col className="schemes wrapper" mobile={12}>
-                {hasServers || hasSchemes ? (
-                  <div className="schemes-server-container">
-                    {hasServers ? <ServersContainer /> : null}
-                    {hasSchemes ? <SchemesContainer /> : null}
+                {hasServers || hasSchemes || hasSecurityDefinitions ? (
+                  <div className="scheme-container">
+                    <Col className="schemes wrapper" mobile={12}>
+                      {hasServers || hasSchemes ? (
+                        <div className="schemes-server-container">
+                          {hasServers ? <ServersContainer /> : null}
+                          {hasSchemes ? <SchemesContainer /> : null}
+                        </div>
+                      ) : null}
+                      {hasSecurityDefinitions ? <AuthorizeBtnContainer /> : null}
+                    </Col>
                   </div>
                 ) : null}
-                {hasSecurityDefinitions ? <AuthorizeBtnContainer /> : null}
-              </Col>
+
+                <FilterContainer />
+
+                <Row>
+                  <Col mobile={12} desktop={12}>
+                    <Operations />
+                  </Col>
+                </Row>
+
+                {isOAS31 && (
+                  <Row className="webhooks-container">
+                    <Col mobile={12} desktop={12}>
+                      <Webhooks />
+                    </Col>
+                  </Row>
+                )}
+
+                {/* <Row>
+                  <Col mobile={12} desktop={12}>
+                    <Models />
+                  </Col>
+                </Row> */}
+              </VersionPragmaFilter>
             </div>
-          ) : null}
-
-          <FilterContainer />
-
-          <Row>
-            <Col mobile={12} desktop={12}>
-              <Operations />
-            </Col>
-          </Row>
-
-          {isOAS31 && (
-            <Row className="webhooks-container">
-              <Col mobile={12} desktop={12}>
-                <Webhooks />
-              </Col>
-            </Row>
-          )}
-
-          <Row>
-            <Col mobile={12} desktop={12}>
-              <Models />
-            </Col>
-          </Row>
-        </VersionPragmaFilter>
+          </div>
+        ) : (
+          <div className="center-layout">
+            <h1>Please provide valid access token.</h1>
+          </div>
+        )}
       </div>
     )
   }
