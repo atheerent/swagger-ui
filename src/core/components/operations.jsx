@@ -28,10 +28,13 @@ export default class Operations extends React.Component {
     if(taggedOps.size === 0) {
       return <h3> No operations defined in spec!</h3>
     }
+    const isPublicURL = (tagObj) => {
+      return tagObj?.toJS().operations?.filter(op => op.path.includes('/public')).length;
+    }
 
     return (
       <div>
-        { taggedOps.map(this.renderOperationTag).toArray() }
+        { taggedOps.filter(tag => isPublicURL(tag)).map(this.renderOperationTag).toArray() }
         { taggedOps.size < 1 ? <h3> No operations defined in spec! </h3> : null }
       </div>
     )
