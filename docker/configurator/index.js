@@ -44,6 +44,12 @@ fs.writeFileSync(
   `${beforeStartMarkerContent}
       ${START_MARKER}
       window.ui = SwaggerUIBundle({
+        requestInterceptor: function(request) {
+          if(request.url.includes('/api/docs.yaml')) {
+            request.headers['Accept-language'] = 'en-US';
+          }
+          return request;
+        },
         ${indent(translator(process.env, {injectBaseConfig: true}), 8, 2)}
       })
       ${indent(oauthBlockBuilder(process.env), 6, 2)}
