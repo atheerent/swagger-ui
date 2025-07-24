@@ -109,6 +109,7 @@ class TopBar extends React.Component {
   }
 
   render() {
+    return <></>
     let { getComponent, specSelectors, getConfigs } = this.props
     const Button = getComponent("Button")
     const Link = getComponent("Link")

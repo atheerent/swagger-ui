@@ -44,6 +44,7 @@ export default class OnlineValidatorBadge extends React.Component {
     render() {
         let { getConfigs } = this.props
         let { spec } = getConfigs()
+        const isDevelopment = process.env.NODE_ENV !== "production"
 
         let sanitizedValidatorUrl = sanitizeUrl(this.state.validatorUrl)
 
@@ -54,11 +55,12 @@ export default class OnlineValidatorBadge extends React.Component {
           return null
         }
 
-        return (<span className="float-right">
+        return (isDevelopment ? 
+          (<span className="float-right">
                 <a target="_blank" rel="noopener noreferrer" href={`${ sanitizedValidatorUrl }/debug?url=${ encodeURIComponent(this.state.url) }`}>
                     <ValidatorImage src={`${ sanitizedValidatorUrl }?url=${ encodeURIComponent(this.state.url) }`} alt="Online validator badge"/>
                 </a>
-            </span>)
+            </span>) : <></>)
     }
 }
 

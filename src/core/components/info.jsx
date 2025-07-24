@@ -101,13 +101,13 @@ class Info extends React.Component {
             {title}
             <span>
               {version && <VersionStamp version={version} />}
-              <OpenAPIVersion oasVersion="2.0" />
+              {/* <OpenAPIVersion oasVersion="2.0" /> */}
             </span>
           </h2>
-          {host || basePath ? (
+          {/* {host || basePath ? (
             <InfoBasePath host={host} basePath={basePath} />
           ) : null}
-          {url && <InfoUrl getComponent={getComponent} url={url} />}
+          {url && <InfoUrl getComponent={getComponent} url={url} />} */}
         </hgroup>
 
         <div className="description">

@@ -194,14 +194,6 @@ export default class Operation extends PureComponent {
                   </div> : null
               }
 
-              { !tryItOutEnabled || !allowTryItOut || validationErrors.length <= 0 ? null : <div className="validation-errors errors-wrapper">
-                  Please correct the following validation errors and try again.
-                  <ul>
-                    { validationErrors.map((error, index) => <li key={index}> { error } </li>) }
-                  </ul>
-                </div>
-              }
-
             <div className={(!tryItOutEnabled || !response || !allowTryItOut) ? "execute-wrapper" : "btn-group"}>
               { !tryItOutEnabled || !allowTryItOut ? null :
 
