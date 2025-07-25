@@ -1,6 +1,5 @@
 @use "sass:meta";
 @use "type";
-
 .swagger-ui {
   @include type.text_body();
   @include meta.load-css("~tachyons-sass/tachyons.scss");
