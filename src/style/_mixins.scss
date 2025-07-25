@@ -141,9 +141,9 @@ $browser-context: 16;
   background: color.adjust($color-delete, $lightness: 35%);
 }
 
-@mixin method($color) {
+@mixin method($color, $opacity: 0.1) {
   border-color: $color;
-  background: rgba($color, 0.1);
+  background: rgba($color, $opacity);
 
   .opblock-summary-method {
     background: $color;
