@@ -103,7 +103,7 @@ class Info extends React.Component {
               {version && <VersionStamp version={version} />}
               {/* <OpenAPIVersion oasVersion="2.0" /> */}
             </span>
-          </h2>
+          </h1>
           {/* {host || basePath ? (
             <InfoBasePath host={host} basePath={basePath} />
           ) : null}
