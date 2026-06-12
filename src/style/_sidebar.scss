@@ -1,3 +1,6 @@
+@use "variables" as *;
+@use "mixins";
+
 .sidebar {
     width: 300px;
     display: flex;
@@ -96,29 +99,29 @@
 }
 
 .method-post {
-    @include method($_color-post, 0.9);
+    @include mixins.method($color-post);
 }
 
 .method-put {
-    @include method($_color-put, 0.9);
+    @include mixins.method($color-put);
 }
 
 .method-delete {
-    @include method($_color-delete, 0.9);
+    @include mixins.method($color-delete);
 }
 
 .method-get {
-    @include method($_color-get, 0.9);
+    @include mixins.method($color-get);
 }
 
 .method-patch {
-    @include method($_color-patch, 0.9);
+    @include mixins.method($color-patch);
 }
 
 .method-head {
-    @include method($_color-head, 0.9);
+    @include mixins.method($color-head);
 }
 
 .method-options {
-    @include method($_color-options, 0.9);
+    @include mixins.method($color-options);
 }
